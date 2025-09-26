@@ -557,7 +557,7 @@
             //alert(response);
             //$("#test").html(response);
             //$("#result").html("Server says: " + response);
-           // window.location.href = "OTP.html";
+            window.location.href = "demo18.html";
 
             response = JSON.parse(response);
             if(response.err){

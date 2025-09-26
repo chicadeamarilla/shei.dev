@@ -142,7 +142,16 @@ class UserController extends Controller
         $found_user = User::find()->where(['username'=>$clean_username])->One();
         if($found_user){
             // login
-           return json_encode(['err'=>'password is wrong']);
+            if($found_user->validatePassword($_POST['user_password'])){
+                echo "OK";
+            }else{
+                echo "not ok";
+            }
+           //  return json_encode(['err'=>'password is wrong']);
+               //         return json_encode(['ok'=>'login successful']);
+       
+
+         
         }else{
             // signup
             $shei = new User();

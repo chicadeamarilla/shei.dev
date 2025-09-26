@@ -5,6 +5,11 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 
+
+// inside loginProcess.php
+
+
+
 /**
  * Login form
  */
@@ -31,6 +36,7 @@ class LoginForm extends Model
             ['password', 'validatePassword'],
         ];
     }
+    
 
     /**
      * Validates the password.
@@ -47,6 +53,7 @@ class LoginForm extends Model
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
+        
     }
 
     /**
@@ -74,6 +81,9 @@ class LoginForm extends Model
             $this->_user = User::findByUsername($this->username);
         }
 
+
         return $this->_user;
     }
 }
+
+
