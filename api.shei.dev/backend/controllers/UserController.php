@@ -143,15 +143,10 @@ class UserController extends Controller
         if($found_user){
             // login
             if($found_user->validatePassword($_POST['user_password'])){
-                echo "OK";
+                return json_encode(['ok'=>'login successful damet garm','user_id'=>$found_user->id,'user_email'=>$found_user->email]);
             }else{
-                echo "not ok";
+                return json_encode(['err'=>'password is wrong']);
             }
-           //  return json_encode(['err'=>'password is wrong']);
-               //         return json_encode(['ok'=>'login successful']);
-       
-
-         
         }else{
             // signup
             $shei = new User();

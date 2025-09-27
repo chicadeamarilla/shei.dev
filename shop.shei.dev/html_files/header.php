@@ -13,11 +13,17 @@
     <meta name="author" content="D-THEMES">
 
     <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/icons/favicon.png">
-
+    <!-- Preload Font -->
+    <link rel="preload" href="fonts/riode.ttf?5gap68" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
+    <link rel="preload" href="vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+        crossorigin="anonymous">
     <script>
         WebFontConfig = {
-            google: { families: [ 'Poppins:400,500,600,700' ] }
+            google: { families: [ 'Poppins:400,500,600,700,800,900', 'Jost:400,500,600,700' ] }
         };
         ( function ( d ) {
             var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
@@ -27,17 +33,18 @@
         } )( document );
     </script>
 
-
     <link rel="stylesheet" type="text/css" href="vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/animate/animate.min.css">
 
     <!-- Plugins CSS File -->
     <link rel="stylesheet" type="text/css" href="vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/owl-carousel/owl.carousel.min.css">
 
     <link rel="stylesheet" type="text/css" href="vendor/sticky-icon/stickyicon.css">
 
     <!-- Main CSS File -->
-    <link rel="stylesheet" type="text/css" href="css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="css/demo18.min.css">
+
     <link rel="stylesheet" type="text/css" href="external_lib/toast/toastify.min.css">
 
 </head>
@@ -74,10 +81,11 @@
                         <span class="divider"></span>
                         <a href="contact-us.html" class="contact d-lg-show"><i class="d-icon-map"></i>Contact</a>
                         <a href="#" class="help d-lg-show"><i class="d-icon-info"></i> Need Help</a>
-                        <a class="login-link" href="ajax/login.html" data-toggle="login-modal"><i
-                                class="d-icon-user"></i>Sign in</a>
-                        <span class="delimiter">/</span>
-                        <a class="register-link ml-0" href="ajax/login.html" data-toggle="login-modal">Register</a>
+
+
+                        <a  id="sign_in_link" href="login.php" ><i
+                                class="d-icon-user"></i>Sign in / Register</a>
+                        
                         <!-- End of Login -->
                     </div>
                 </div>
