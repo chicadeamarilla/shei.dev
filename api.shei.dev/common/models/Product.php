@@ -57,4 +57,24 @@ class Product extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public  static function save_product_categories($product_cat_list, $id)
+    {
+
+        foreach ((array) $product_cat_list as $ct) {
+
+
+            $h = new Product_has_category();
+            $h->product_id = $id;
+            $h->category_id = $ct;
+            if (!$h->save()) {
+                //print_r($h->getErrors());
+                //exit();
+            }
+
+
+
+        }
+    }
+
 }

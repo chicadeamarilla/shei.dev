@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Product_has_category;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -23,24 +24,34 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'order_show')->textInput() ?>
-    
-    
+
+
+    <?php
+    $pre_selected = [];
+    foreach(Product_has_category::find()->where(['product_id'=>$model->id])->all() as $pc){
+        $pre_selected[]= $pc->category_id;
+    }
+    $model->category_id =  $pre_selected;
+    ?>
+
     <?= $form->field($model, 'category_id')->dropDownList(
-      \common\models\Product_category::find()
-        ->select(['name', 'id'])   // id = value, name = label
-        ->indexBy('id')            // makes array keys = id
-        ->column() ,                  // items from Category model
-    [ 'multiple' => true,           // enable multiple select
-        'class' => 'form-control',    // bootstrap styling
-        'size' => 5,    ] // first empty option
-) ?>
+        \common\models\Product_category::find()
+            ->select(['name', 'id'])   // id = value, name = label
+            ->indexBy('id')            // makes array keys = id
+            ->column(),                  // items from Category model
+        [
+            'multiple' => true,           // enable multiple select
+            'class' => 'form-control',    // bootstrap styling
+            'size' => 5,
+        ] // first empty option
+    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-    
-    
-    
+
+
+
 
     <?php ActiveForm::end(); ?>
 

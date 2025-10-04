@@ -72,25 +72,13 @@ class ProductController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                
-                
-                
-                
-                foreach((array)$_POST['Product']['category_id'] as $ct){
-                
-                
-                $h = new Product_has_category();
-                $h->product_id = $id;
-                $h->category_id = $ct;
-                if(! $h->save() ){
-                   //print_r($h->getErrors());
-                   //exit();
-                }
-                
-                
-                
-            }
-                
+
+
+
+
+                Product::save_product_categories($_POST['Product']['category_id'], $id);
+
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -114,26 +102,16 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            
-            
-            foreach((array)$_POST['Product']['category_id'] as $ct){
-                
-                
-                $h = new Product_has_category();
-                $h->product_id = $id;
-                $h->category_id = $ct;
-                if(! $h->save() ){
-                   //print_r($h->getErrors());
-                   //exit();
-                }
-                
-                
-                
+
+            if ($_POST['Product']['category_id']) {
+                Product_has_category::deleteAll(['product_id' => $id]);
+                // this line remove all Product_has_category where product_id. == id
             }
-            
-            
-            
-            
+
+            Product::save_product_categories($_POST['Product']['category_id'], $id);
+
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -171,4 +149,23 @@ class ProductController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionProduct_list($id)
+    {
+
+        $all_products = Product_has_category::find()->where(['category_id' => $id])->all();
+        $all_data = [];
+        foreach($all_products as $p){
+            
+            $single_product = Product::findOne($p->product_id)->attributes;
+            
+            $all_data[$single_product['id']]=$single_product;
+        }
+
+
+        return json_encode(['data'=>$all_data,'count'=>count($all_data)]);
+        
+    }
+
+
 }
