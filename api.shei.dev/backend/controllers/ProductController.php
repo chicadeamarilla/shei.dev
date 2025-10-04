@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Product;
 use common\models\Product_s;
 use common\models\Product_has_category;
+use common\models\Product_category;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -100,7 +101,6 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
             if ($_POST['Product']['category_id']) {
@@ -155,16 +155,21 @@ class ProductController extends Controller
 
         $all_products = Product_has_category::find()->where(['category_id' => $id])->all();
         $all_data = [];
-        foreach($all_products as $p){
-            
+        foreach ($all_products as $p) {
+
             $single_product = Product::findOne($p->product_id)->attributes;
-            
-            $all_data[$single_product['id']]=$single_product;
+
+            $all_data[$single_product['id']] = $single_product;
         }
 
+        $product_category_name = Product_category::findOne($id)->name;
 
-        return json_encode(['data'=>$all_data,'count'=>count($all_data)]);
-        
+        return json_encode([
+            'name' => $product_category_name,
+            'data' => $all_data,
+            'count' => count($all_data)
+        ]);
+
     }
 
 

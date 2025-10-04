@@ -55,7 +55,7 @@ class Product extends \yii\db\ActiveRecord
             'image' => 'Image',
             'order_show' => 'Order Show',
         ];
-    }
+    }  
 
 
     public  static function save_product_categories($product_cat_list, $id)
