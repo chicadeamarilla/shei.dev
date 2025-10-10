@@ -77,7 +77,7 @@ class ProductController extends Controller
 
 
 
-                Product::save_product_categories($_POST['Product']['category_id'], $id);
+                Product::save_product_categories($_POST['Product']['category_id'], $model->id);
 
 
                 return $this->redirect(['view', 'id' => $model->id]);
