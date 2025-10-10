@@ -6,9 +6,11 @@ use common\models\Product;
 use common\models\Product_s;
 use common\models\Product_has_category;
 use common\models\Product_category;
+use common\models\Upload;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -74,11 +76,12 @@ class ProductController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
 
-
+ 
 
 
                 Product::save_product_categories($_POST['Product']['category_id'], $model->id);
-
+                $model = Upload::Upload___($model, 'image', 'temp');
+                $model->save();
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -107,7 +110,8 @@ class ProductController extends Controller
                 Product_has_category::deleteAll(['product_id' => $id]);
                 // this line remove all Product_has_category where product_id. == id
             }
-
+            $model = Upload::Upload___($model, 'image', 'temp');
+            $model->save();
             Product::save_product_categories($_POST['Product']['category_id'], $id);
 
 

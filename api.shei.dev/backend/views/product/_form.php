@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Product_has_category;
+use common\models\Upload;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -21,7 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    
+
+    <?= Upload::render_input_upload($form, $model, 'temp'); ?>
 
     <?= $form->field($model, 'order_show')->textInput() ?>
 

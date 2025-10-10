@@ -18,6 +18,8 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 {
 
+
+    public $temp, $temp_del;
     public $category_id;
     /**
      * {@inheritdoc}
