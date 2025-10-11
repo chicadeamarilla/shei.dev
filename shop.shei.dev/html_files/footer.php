@@ -562,10 +562,94 @@
         if (getCookie("user-app-id")) {
 
             $("#sign_in_link").html(getCookie("user-app-id"));
-            $("#sign_in_link").attr('href','logout.php');
+            $("#sign_in_link").attr('href', 'logout.php');
 
         }
 
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.has('product_category_id')) {
+
+
+
+
+
+            console.log('id param exists:', urlParams.get('product_category_id'));
+
+            $.ajax({
+                url: 'https://api.shei.dev/backend/web/product/product_list?id=' + urlParams.get('product_category_id'),
+                type: 'GET',
+                success: function (response) {
+                    response = JSON.parse(response);
+                    $("#cat_name").html(response.name);
+
+
+
+                    console.log(response.data);
+Object.values(response.data).forEach(product => {
+     $("#product_list").append(`
+    <div class="product-wrap">
+      <div class="product">
+        <figure class="product-media">
+          <a href="product.html?id=${product.id}">
+            <img src="https://api.shei.dev/backend/web/${product.image}" alt="${product.name}" width="280" height="315">
+          </a>
+          <div class="product-label-group">
+            ${product.isNew ? '<label class="product-label label-new">new</label>' : ''}
+            ${product.discount ? `<label class="product-label label-sale">${product.discount}% OFF</label>` : ''}
+          </div>
+          <div class="product-action-vertical">
+            <a href="#" class="btn-product-icon btn-cart" title="Add to cart"><i class="d-icon-bag"></i></a>
+            <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="d-icon-heart"></i></a>
+          </div>
+          <div class="product-action">
+            <a href="#" class="btn-product btn-quickview" title="Quick View">Quick View</a>
+          </div>
+        </figure>
+        <div class="product-details">
+          <div class="product-cat">
+            <a href="#">${product.category}</a>
+          </div>
+          <h3 class="product-name">
+            <a href="product.html?id=${product.id}">${product.name}</a>
+          </h3>
+          <div class="product-price">
+            <ins class="new-price">$${product.price}</ins>
+          </div>
+          <div class="ratings-container">
+            <div class="ratings-full">
+              <span class="ratings" style="width:${product.rating * 20}%"></span>
+            </div>
+            <a href="#" class="rating-reviews">(${product.reviews} reviews)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+      
+    });
+                    
+
+                    
+                   
+
+
+                    console.log('Response:', response);
+                },
+                error: function (xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+
+
+
+
+
+        } else {
+            console.log('no id param');
+        }
 
 
         $("#LOGIN").click(function () {

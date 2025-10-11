@@ -15,12 +15,20 @@ class Upload extends ActiveRecord {
         ];
     }
 
-     public static function render_input_upload($form, $model, $field_name, $delete = true)
+     public static function render_input_upload($form, $model, $field_name,$model_fielad_name, $delete = true)
     {
 
 
 
         $r = $form->field($model, $field_name)->FileInput(['maxlength' => true]);
+
+        
+        if($model->{$model_fielad_name}){
+            
+            $r .= '<img width="200" src="/backend/web/'.$model->{$model_fielad_name}.'" >';
+        } 
+
+
         if ($delete)
             $r .= "<br>" . $form->field($model, $field_name . "_del")->checkbox(['value' => "1"]);
         return $r;
@@ -39,14 +47,13 @@ class Upload extends ActiveRecord {
     {
 
 
-        $backup = $model->{$field_name};
-
+       
         $model->{$form_field} = UploadedFile::getInstance($model, $form_field);
 
-        if ($model->{$form_field}->basename) {
+        if (isset($model->{$form_field}->basename)) {
 
 
-
+ 
             $t =  time();
 
             $model->{$form_field}->saveAs($basfname . $t . $field_name . '.' . $model->{$form_field}->extension);

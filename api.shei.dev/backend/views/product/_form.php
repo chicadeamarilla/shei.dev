@@ -24,7 +24,9 @@ use yii\widgets\ActiveForm;
 
     
 
-    <?= Upload::render_input_upload($form, $model, 'temp'); ?>
+    <?= Upload::render_input_upload($form, $model, 'temp','image'); ?>
+
+
 
     <?= $form->field($model, 'order_show')->textInput() ?>
 

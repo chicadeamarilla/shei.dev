@@ -76,7 +76,7 @@ class ProductController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
 
- 
+
 
 
                 Product::save_product_categories($_POST['Product']['category_id'], $model->id);
@@ -111,6 +111,17 @@ class ProductController extends Controller
                 // this line remove all Product_has_category where product_id. == id
             }
             $model = Upload::Upload___($model, 'image', 'temp');
+
+            if ($_POST['Product']['temp_del']) {
+
+
+                if (isset($model->image) && file_exists($model->image)) {
+                    unlink($model->image);
+                    $model->image = null;
+                }
+            }
+
+            
             $model->save();
             Product::save_product_categories($_POST['Product']['category_id'], $id);
 
@@ -171,7 +182,8 @@ class ProductController extends Controller
         return json_encode([
             'name' => $product_category_name,
             'data' => $all_data,
-            'count' => count($all_data)
+            'count' => count($all_data),
+            
         ]);
 
     }
