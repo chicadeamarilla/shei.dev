@@ -12,19 +12,9 @@
                             <div class="sidebar-content">
                                 <div class="sticky-sidebar" data-sticky-options="{'top': 0}">
                                     <div class="widget widget-category mb-8">
-                                        <ul class="menu vertical-menu category-menu">
-                                            <li><a href="shop.html">Accessories</a></li>
-                                            <li><a href="shop.html">Backpack &amp; Fashion Bags</a></li>
-                                            <li><a href="shop.html">Casual Clothing</a></li>
-                                            <li><a href="shop.html">Gift</a></li>
-                                            <li><a href="shop.html">Jewellery</a></li>
-                                            <li><a href="shop.html">Leather Goods</a></li>
-                                            <li><a href="shop.html">Merry Christmas</a></li>
-                                            <li><a href="shop.html">Under $25</a></li>
-                                            <li><a href="shop.html">Watches</a></li>
-                                            <li><a href="shop.html">Best Selling Products</a></li>
-                                            <li><a href="shop.html">Trends 2021</a></li>
-                                            <li><a href="shop.html">Buy Riode</a></li>
+                                        <ul class="menu vertical-menu category-menu" id="home_category_list">
+                                            
+                                            
                                         </ul>
                                     </div>
                                     <div class="banner banner-newsletter mb-10">

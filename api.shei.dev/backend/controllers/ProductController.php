@@ -121,7 +121,7 @@ class ProductController extends Controller
                 }
             }
 
-            
+
             $model->save();
             Product::save_product_categories($_POST['Product']['category_id'], $id);
 
@@ -172,10 +172,20 @@ class ProductController extends Controller
         $all_data = [];
         foreach ($all_products as $p) {
 
-            $single_product = Product::findOne($p->product_id)->attributes;
 
-            $all_data[$single_product['id']] = $single_product;
+
+
+            $single_product = Product::findOne($p->product_id);
+            if ($single_product) {
+                $single_product = $single_product->attributes;
+                $all_data[$single_product['id']] = $single_product;
+            }
+
+
+
         }
+
+
 
         $product_category_name = Product_category::findOne($id)->name;
 
@@ -183,10 +193,28 @@ class ProductController extends Controller
             'name' => $product_category_name,
             'data' => $all_data,
             'count' => count($all_data),
-            
+
         ]);
 
     }
+    public function actionSearch($q)
+    {
+        $search_product = Product::find()
+            ->where(['like', 'name', $q])
+            ->orWhere(['like', 'description', $q])
+            ->all();
+        $all_data = [];
+        foreach ($search_product as $single) {
+            $all_data[] = [
+                'id' => $single->id,
+                'name' => $single->name,
+                'description' => $single->description,
+                'image' => $single->image ? 'https://api.shei.dev/backend/web/' . $single->image : ''
+            ];
 
+
+        }
+        return json_encode($all_data);
+    }
 
 }

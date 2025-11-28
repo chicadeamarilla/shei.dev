@@ -131,4 +131,14 @@ class Product_categoryController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionProduct_category_list()
+    {
+        $all_cat_list = Product_category::find()->all();
+        $all_data = [];
+        foreach ($all_cat_list as $s) {
+            $all_data[] = ['name' => $s->name, 'id' => $s->id];
+        }
+        return json_encode(['data' => $all_data]);
+
+    }
 }

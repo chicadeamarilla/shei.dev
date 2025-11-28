@@ -157,7 +157,7 @@ class UserController extends Controller
             $shei->password_hash = Yii::$app->security->generatePasswordHash($_POST['user_password']);
             $shei->status = 10;
             if($shei->save()){
-                return json_encode(['ok'=>'yes','username'=>$shei->username]);
+                return json_encode(['ok'=>'yes','username'=>$shei->username,'user_id'=>$shei->id]);
             }else{
                 return json_encode(['err'=>print_r($shei->getErrors(),1)]);
             }
