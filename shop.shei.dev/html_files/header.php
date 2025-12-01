@@ -23,14 +23,14 @@
         crossorigin="anonymous">
     <script>
         WebFontConfig = {
-            google: { families: [ 'Poppins:400,500,600,700,800,900', 'Jost:400,500,600,700' ] }
+            google: { families: ['Poppins:400,500,600,700,800,900', 'Jost:400,500,600,700'] }
         };
-        ( function ( d ) {
-            var wf = d.createElement( 'script' ), s = d.scripts[ 0 ];
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
             wf.src = 'js/webfont.js';
             wf.async = true;
-            s.parentNode.insertBefore( wf, s );
-        } )( document );
+            s.parentNode.insertBefore(wf, s);
+        })(document);
     </script>
 
     <link rel="stylesheet" type="text/css" href="vendor/fontawesome-free/css/all.min.css">
@@ -83,9 +83,8 @@
                         <a href="#" class="help d-lg-show"><i class="d-icon-info"></i> Need Help</a>
 
 
-                        <a  id="sign_in_link" href="login.php" ><i
-                                class="d-icon-user"></i>Sign in / Register</a>
-                        
+                        <a id="sign_in_link" href="login.php"><i class="d-icon-user"></i>Sign in / Register</a>
+
                         <!-- End of Login -->
                     </div>
                 </div>
@@ -101,15 +100,45 @@
                             <img src="images/logo.png" alt="logo" width="153" height="44" />
                         </a>
                         <!-- End Logo -->
+                        <style>
+                            .header-search {
+                                position: relative;
+                            }
 
+                            #search-results {
+                                position: absolute;
+                                top: 100%;
+                                /* directly under input-wrapper */
+                                left: 0;
+                                width: 100%;
+                                background: #fff;
+                                border: 1px solid #ddd;
+                                border-top: none;
+                                max-height: 250px;
+                                overflow-y: auto;
+                                display: none;
+                                z-index: 2000;
+                            }
+
+                            #search-results .item {
+                                padding: 10px;
+                                cursor: pointer;
+                                border-bottom: 1px solid #eee;
+                            }
+
+                            #search-results .item:hover {
+                                background: #f0f0f0;
+                            }
+                        </style>
                         <div class="header-search hs-simple">
                             <form action="#" class="input-wrapper">
-                                <input type="text" class="form-control" name="search" autocomplete="off"
+                                <input type="text" class="form-control" id="search-input" name="search" autocomplete="off"
                                     placeholder="Search..." required />
                                 <button class="btn btn-search" type="submit">
                                     <i class="d-icon-search"></i>
                                 </button>
                             </form>
+                            <div id="search-results"></div>
                         </div>
                         <!-- End Header Search -->
                     </div>

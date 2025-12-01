@@ -25,6 +25,27 @@ $(document).ready(function () {
     }
 
 
+     $('#search-input').on('keyup', function () {
+ 
+        let query = $(this).val().trim();
+        console.log(query);
+
+
+    
+
+        $.ajax({
+            url: 'https://api.shei.dev/backend/web/product/search?q='+query,   // your PHP handler
+            type: 'GET',
+            
+            success: function (response) {
+                // response should be HTML or JSON
+                $('#search-results').html(response).show();
+            }
+        }); 
+
+    });
+
+
     let path = window.location.pathname;
 
     // Extract file name
